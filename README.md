@@ -6,7 +6,7 @@
 
 From the directory of the pipeline file, just run:
 
-dagster pipeline execute -f xxx.py
+```dagster pipeline execute -f xxx.py```
 
 ### From Python, use Dagster’s Python API, for example:
 
@@ -14,7 +14,8 @@ dagster pipeline execute -f xxx.py
     result = execute_pipeline(hello_cereal_pipeline)
 ```
 
-### From a GUI, use the Dagit tool to visualize the pipeline in Dagit, from the directory of pipeline file, just run:
+### From a GUI, use the Dagit tool to visualize the pipeline
+From the directory of pipeline file, just run:
 
-dagit -f xxx.py
+```dagit -f xxx.py```
 
