@@ -19,3 +19,7 @@ From the directory of pipeline file, just run:
 
 ```dagit -f xxx.py```
 
+Or run the pipeline reops by just:
+```digit```
+
+
