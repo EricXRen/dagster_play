@@ -1,14 +1,6 @@
-import os, csv
-
 from dagster import solid, pipeline
-from dagster import Field, Bool, OutputDefinition, Output
 
-@solid
-def load_cereals(_):
-    dataset_path = os.path.join(os.path.dirname(__file__), "cereal.csv")
-    with open(dataset_path, "r") as fd:
-        cereals = [row for row in csv.DictReader(fd)]
-    return cereals
+from input import load_cereals
 
 
 @solid

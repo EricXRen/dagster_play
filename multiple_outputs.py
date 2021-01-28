@@ -1,7 +1,7 @@
 from dagster import solid, pipeline
 from dagster import Field, Bool, OutputDefinition, Output
 
-from input import read_csv
+from input import load_cereals
 
 
 @solid(
@@ -45,7 +45,7 @@ def sort_cold_cereals_by_calories(context, cereals):
 
 @pipeline
 def multiple_outputs_pipeline():
-    hot_cereals, cold_cereals = split_cereals(read_csv())
+    hot_cereals, cold_cereals = split_cereals(load_cereals())
     sort_hot_cereals_by_calories(hot_cereals)
     sort_cold_cereals_by_calories(cold_cereals)
 

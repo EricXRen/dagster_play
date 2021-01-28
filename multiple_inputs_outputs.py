@@ -1,8 +1,9 @@
-from dagster import solid, pipeline, execute_pipeline
+import pandas as pd
+
+from dagster import solid, pipeline, execute_pipeline, AssetMaterialization, EventMetadataEntry
 from dagster import Field, Bool, OutputDefinition, Output
 
-from input import read_csv
-import pandas as pd
+from input import load_cereals
 
 
 @solid(
@@ -54,12 +55,19 @@ def compare_calories(context, cereals, least_hot, least_cold):
     context.log.info(
         f"Compare the calories of hot and cold cereals: {cereal_choice} is healthier"
     )
+    yield AssetMaterialization(
+        asset_key="cereal_choice",
+        description="Which cereal is healthiest",
+        metadata_entries=[
+            EventMetadataEntry.text(cereal_choice, "Cereal Choice")
+        ],
+    )
     yield Output(cereal_choice)
 
 
 @pipeline
-def multiple_outputs_pipeline():
-    cereals = read_csv()
+def multiple_input_outputs_pipeline():
+    cereals = load_cereals()
 
     hot_cereals, cold_cereals = split_cereals(cereals)
     hot_cereal = sort_hot_cereals_by_calories(hot_cereals)
@@ -73,12 +81,12 @@ def main():
 
     run_config = {
         "solids": {
-            "read_csv": {"inputs": {"csv_path": {"value": "cereal.csv"}}},
+            "load_cereals": {"inputs": {"csv_path": {"value": "cereal.csv"}}},
             "split_cereals": {"config": {"process_hot": True, "process_cold": True}},
         }
     }
 
-    result = execute_pipeline(multiple_outputs_pipeline, run_config)
+    result = execute_pipeline(multiple_input_outputs_pipeline, run_config)
 
 
 if __name__ == "__main__":

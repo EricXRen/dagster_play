@@ -1,6 +1,6 @@
 from dagster import execute_pipeline, pipeline, solid
 from dagster import Field, Bool
-from input import read_csv
+from input import load_cereals
 
 """To config the solid parameters by given the config_schema argument"""
 
@@ -47,7 +47,7 @@ def sort_by_calories(context, cereals):
 
 @pipeline
 def inputs_pipeline():
-    sort_by_calories(read_csv())
+    sort_by_calories(load_cereals())
 
 
 def main():
@@ -55,7 +55,7 @@ def main():
 
     run_config = {
         "solids": {
-            "read_csv": {"inputs": {"csv_path": {"value": "cereal.csv"}}},
+            "load_cereals": {"inputs": {"csv_path": {"value": "cereal.csv"}}},
             "sort_by_calories": {"config": {"reverse": True}},
         }
     }

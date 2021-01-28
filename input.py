@@ -5,7 +5,7 @@ from dagster import execute_pipeline, pipeline, solid
 
 
 @solid
-def read_csv(context, csv_path):
+def load_cereals(context, csv_path):
     """Parametrizing Solids with Inputs"""
 
     csv_path = os.path.join(os.path.dirname(__file__), csv_path)
@@ -17,7 +17,7 @@ def read_csv(context, csv_path):
 
 
 @solid
-def sort_by_calories(context, cereals):
+def sort_by_cal(context, cereals):
     sorted_cereals = sorted(cereals, key=lambda cereal: int(cereal["calories"]))
     context.log.info(
         "Least caloric cereal: {least_caloric}".format(
@@ -37,14 +37,14 @@ def sort_by_calories(context, cereals):
 
 @pipeline
 def inputs_pipeline():
-    sort_by_calories(read_csv())
+    sort_by_cal(load_cereals())
 
 
 def main():
     """Specifying Config for Pipeline Execution"""
 
     run_config = {
-        "solids": {"read_csv": {"inputs": {"csv_path": {"value": "cereal.csv"}}}}
+        "solids": {"load_cereals": {"inputs": {"csv_path": {"value": "cereal.csv"}}}}
     }
 
     result = execute_pipeline(inputs_pipeline, run_config=run_config)

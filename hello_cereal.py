@@ -25,7 +25,7 @@ def hello_cereal(context):
     return cereals
 
 @pipeline
-def hello_cereal_pipeline():
+def hello_pipeline():
     """
     This call doesn't actually execute the solid—within the body of functions
     decorated with @pipeline. Dagster uses function calls to indicate the
