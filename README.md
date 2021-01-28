@@ -23,4 +23,7 @@ Or run the pipeline reops by just:
 
 ```digit```
 
+### 
+
+```dagster-daemon run```
 

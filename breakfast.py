@@ -3,10 +3,6 @@ import pandas as pd
 from dagster import solid, pipeline, execute_pipeline
 from dagster import Field, Bool, OutputDefinition, Output
 
-from input import load_cereals
-
-import dagster_aws
-
 @solid
 def prepare_breakfast(context):
     context.log.info(f"Prepare healthy breakfast. (Run_id: {context.run_id})")

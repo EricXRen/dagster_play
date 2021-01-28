@@ -6,11 +6,11 @@ from breakfast import breakfast_pipeline
 from hello_cereal import hello_pipeline
 from input import inputs_pipeline
 from complex_pipeline import complex_pipeline
-from multiple_inputs_outputs import multiple_input_outputs_pipeline
+from cereal_selection import cereal_selection_pipeline
 
 
 @daily_schedule(
-    pipeline_name="multiple_input_outputs_pipeline",
+    pipeline_name="cereal_selection_pipeline",
     start_date=datetime(2021, 1, 1),
     execution_time=time(7, 30),
     execution_timezone="Europe/London",  # "UTC"
@@ -47,7 +47,7 @@ def hello_cereal_repository():
     #         "hello_pipeline": lambda: hello_pipeline,
     #         "inputs_pipeline": lambda: inputs_pipeline,
     #         "complex_pipeline": lambda: complex_pipeline,
-    #         "multiple_input_outputs_pipeline": lambda: multiple_input_outputs_pipeline,
+    #         "cereal_selection_pipeline": lambda: cereal_selection_pipeline,
     #         "breakfast_pipeline": lambda: breakfast_pipeline,
     #     },
     #     "schedules": {"good_morning_schedule": lambda: good_morning_schedule}
@@ -57,7 +57,7 @@ def hello_cereal_repository():
         hello_pipeline,
         inputs_pipeline,
         complex_pipeline,
-        multiple_input_outputs_pipeline,
+        cereal_selection_pipeline,
         breakfast_pipeline,
         good_morning_schedule,
         healthy_cereal_sensor

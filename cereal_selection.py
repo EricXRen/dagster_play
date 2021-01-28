@@ -66,7 +66,7 @@ def compare_calories(context, cereals, least_hot, least_cold):
 
 
 @pipeline
-def multiple_input_outputs_pipeline():
+def cereal_selection_pipeline():
     cereals = load_cereals()
 
     hot_cereals, cold_cereals = split_cereals(cereals)
@@ -86,7 +86,7 @@ def main():
         }
     }
 
-    result = execute_pipeline(multiple_input_outputs_pipeline, run_config)
+    result = execute_pipeline(cereal_selection_pipeline, run_config)
 
 
 if __name__ == "__main__":
