@@ -67,6 +67,7 @@ def compare_calories(context, cereals, least_hot, least_cold):
 
 @pipeline
 def cereal_selection_pipeline():
+    """Demo pipeline"""
     cereals = load_cereals()
 
     hot_cereals, cold_cereals = split_cereals(cereals)
